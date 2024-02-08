@@ -45,13 +45,12 @@ class Game(tk.Tk):
                 x1, y1 = y * 105, x * 105
                 x2, y2 = x1 + 100, y1 + 100
                 num = self.board[x][y]
-                if num == 2:
-                    self.square[x,y] = self.canvas.create_rectangle(x1,y1,x2,y2, fill="#e0f2f8", tags="rectangle", outline="", width=0)
-                    self.canvas.create_text((x1 + x2)/2, (y1+y2)/2, font=("Arial", 36), fill="#ffb459", text="2")
-                elif num == 4:
-                    self.square[x,y] = self.canvas.create_rectangle(x1,y1,x2,y2, fill="#b8dbe5", tags="rectangle", outline="", width=0)
-                    self.canvas.create_text((x1 + x2)/2, (y1+y2)/2, font=("Arial", 36), fill="#ffb459", text="4")
+                if num == 2 or num == 4:
+                    fill_color = "#e0f2f8" if num == 2 else "#b8dbe5"
+                    self.square[x, y] = self.canvas.create_rectangle(x1, y1, x2, y2, fill=fill_color, tags="rectangle", outline="", width=0)
+                    self.canvas.create_text((x1 + x2) / 2, (y1 + y2) / 2, font=("Arial", 36), fill="#ffb459", text=str(num))
                 break
+
 
     def isFull(self):
         return all(self.board[x][y] != 0 for x in range(4) for y in range(4)) 
